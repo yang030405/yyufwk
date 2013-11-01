@@ -18,6 +18,8 @@ import org.apache.http.client.entity.UrlEncodedFormEntity;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.message.BasicNameValuePair;
 
+import com.yyu.fwk.common.Callback;
+
 public class HttpUtil {
 
 //	public static String request(String url, Map<String, String> params) throws Exception {

@@ -19,7 +19,7 @@ public class PageFactory {
 		return initPage(clazz, url, new FirefoxDriver());
 	}
 	
-	public static <T extends Page> T initPage(Class<? extends T> clazz, String url, WebDriver driver) throws Exception {
+	public static <T extends Page> T initPage(Class<T> clazz, String url, WebDriver driver) throws Exception {
 		WebDriver _driver = driver;
 		_driver.get(url);
 		Constructor<? extends T> constructor = clazz.getConstructor(WebDriver.class);

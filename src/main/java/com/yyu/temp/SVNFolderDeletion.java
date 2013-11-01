@@ -6,7 +6,7 @@ import com.yyu.fwk.util.FileUtil;
 
 public class SVNFolderDeletion {
 	public static void main(String[] args) {
-		String path = "/Users/apple/Documents/cubead/workspace/jinjilie_v3";
+		String path = "/Users/apple/Desktop/WebContent";
 		deleteSVNFolder(new File(path));
 		System.out.println("done");
 	}

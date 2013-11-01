@@ -15,34 +15,34 @@ import com.csvreader.CsvReader;
 
 public class CsvFileParser implements Iterator<Map<String, String>> {
 	
+	private String tempFileName;
+	
 	private static Log log = LogFactory.getLog(CsvFileParser.class);
 	
 	public static final String EMPTY_TAG = "-";
 	
+	private String[] header;
+	
 	private CsvReader csvReader;
 	
-	private String tempFileName;
-	private String[] header;
 	private long lineNum = 0L;
+	
+	private long lineLength = 0L;
+	
 	private boolean hasNext = false;
-	private String charset = "utf-8";
-	private char separator = '\t';
 	
+	private Map<String, String> currentValue;
+	
+	public String[] getHeader() {
+		return header;
+	}
+
 	public CsvFileParser(String fileName) {		
-		init(new File(fileName));
-	}
-	
-	public CsvFileParser(String fileName, String charset, char separator) {
-		this.charset = charset;
-		this.separator = separator;
-		init(new File(fileName));
-	}
-	
-	private void init(File file){
-		this.tempFileName = file.getPath();
+		File file = new File(fileName);
+		this.tempFileName = fileName;
 		try {
 			//File file=new File(fileName);
-			csvReader = new CsvReader(new FileInputStream(file), separator, Charset.forName(charset));
+			csvReader = new CsvReader(new FileInputStream(file), ',', Charset.forName("utf-8"));
 			
 			//初始化头
 			csvReader.readHeaders();
@@ -51,10 +51,6 @@ public class CsvFileParser implements Iterator<Map<String, String>> {
 		} catch (IOException e) {
 			throw new RuntimeException(e.getMessage(),e);
 		}
-	}
-	
-	public String[] getHeader() {
-		return header;
 	}
 
 	@Override
@@ -68,27 +64,40 @@ public class CsvFileParser implements Iterator<Map<String, String>> {
 		Map<String, String> result = new HashMap<String, String>();
 		
 		try{
+			long tempLineLength = 0;
 			String[] dataArray = csvReader.getValues();
 			if(dataArray.length != header.length){
 				log.warn("lineNum[" + lineNum + "] >> dataArray.length = [" + dataArray.length + "] and header.length = [" + header.length + "] of file[" + this.tempFileName + "]");
 			}
 			for (int i = 0; i < header.length; i++) {
-				if(EMPTY_TAG.equals(dataArray[i]))
+				if("-".equals(dataArray[i]))
 					result.put(header[i], null);
-				else
+				else{
 					result.put(header[i], dataArray[i]);
+					tempLineLength += dataArray[i].getBytes().length;
+				}
 			}
 			hasNext = csvReader.readRecord();
+			lineLength = tempLineLength;
+			currentValue = result;
 			return result;
 		}catch(Exception e){
 			throw new RuntimeException("lineNum[" + lineNum + "] >> an error happen while reading value in file[" + tempFileName + "].", e);
 		}
 	}
 
+	public Long lineLength(){
+		return lineLength;
+	}
+	
 	@Override
 	public void remove() {
 		throw new UnsupportedOperationException("Remove unsupported on CsvFileParser");
 		
+	}
+	
+	public Map<String, String> getCurrentValue(){
+		return this.currentValue;
 	}
 	
 	public void close(){

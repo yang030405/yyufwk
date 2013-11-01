@@ -9,6 +9,9 @@ import org.apache.commons.logging.LogFactory;
 import org.apache.http.HttpEntityEnclosingRequest;
 import org.apache.http.HttpRequest;
 import org.apache.http.NoHttpResponseException;
+import org.apache.http.auth.AuthScope;
+import org.apache.http.auth.UsernamePasswordCredentials;
+import org.apache.http.client.CredentialsProvider;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.HttpRequestRetryHandler;
 import org.apache.http.conn.ClientConnectionManager;
@@ -18,6 +21,7 @@ import org.apache.http.conn.scheme.PlainSocketFactory;
 import org.apache.http.conn.scheme.Scheme;
 import org.apache.http.conn.scheme.SchemeRegistry;
 import org.apache.http.conn.ssl.SSLSocketFactory;
+import org.apache.http.impl.client.BasicCredentialsProvider;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.impl.conn.tsccm.ThreadSafeClientConnManager;
 import org.apache.http.params.BasicHttpParams;
@@ -37,9 +41,9 @@ public class HttpClientManager {
 	//http连接池对每个主机的最大连接数
 	public static int HTTP_MAX_CONNECTION_PER_ROUTE=20;
 	//http连接的超时时间
-	public static int HTTP_CONNECTION_TIMEOUT=20000;
+	public static int HTTP_CONNECTION_TIMEOUT=1000 * 3600 * 12;
 	//http连接传输数据的超时时间
-	public static int HTTP_SO_TIMEOUT=120000;
+	public static int HTTP_SO_TIMEOUT=1000 * 3600 * 12;
 	//http出错后重试次数
 	public static int HTTP_RETRY_COUNT=5;
 	
@@ -82,6 +86,8 @@ public class HttpClientManager {
 		ClientConnectionManager cm = new ThreadSafeClientConnManager(params, schemeRegistry);
 		client = new DefaultHttpClient(cm, params);
 		
+		UsernamePasswordCredentials creds = new UsernamePasswordCredentials("dmadmin", "!dm0711");
+		client.getCredentialsProvider().setCredentials(AuthScope.ANY, creds);
 		
 		//设置重试的条件,DefaluHttpRequestRestryHandler看看源码
 		HttpRequestRetryHandler myRetryHandler = new HttpRequestRetryHandler() {

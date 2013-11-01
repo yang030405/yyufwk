@@ -13,7 +13,6 @@ public class BeanUtil {
 			return true;
 		Class<?> clazz = o.getClass();
 		if (isSimpleType(clazz)){
-			System.out.println(">>" + o.toString().trim());
 			return "".equals(o.toString().trim());
 		} else if (clazz.isArray()){
 			return Array.getLength(o) <= 0;

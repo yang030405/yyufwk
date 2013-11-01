@@ -1,13 +1,15 @@
 package com.yyu.fwk.util;
 
 import java.lang.reflect.Type;
+import java.util.HashMap;
+import java.util.LinkedHashMap;
+import java.util.Map;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import com.google.gson.reflect.TypeToken;
 
 public class JSONUtil {
-	static GsonBuilder gbuilder = new GsonBuilder().setPrettyPrinting().disableHtmlEscaping();// 不转义html标记
+	static GsonBuilder gbuilder = new GsonBuilder().disableHtmlEscaping();// 不转义html标记
 	static Gson gson = gbuilder.setDateFormat("yyyy-MM-dd HH:mm:ss").create();// 格式时间
 
 	public static String toJson(Object beanClazz) {
@@ -19,15 +21,15 @@ public class JSONUtil {
 	}
 	
 	public static void main(String[] args) {
-		String[] campaignIds = new String[]{"1234"};
+		Map<String, String> m = new LinkedHashMap<String, String>();
+		m.put("Monday", "100");
+		m.put("Tuesday", "150");
+		m.put("Wednesday", "180");
+		m.put("Thursday", "200");
+		m.put("Friday", "210");
+		m.put("Saturday", "150");
+		m.put("Sunday", "100");
 		
-		String cidsjson = JSONUtil.toJson(campaignIds);
-		
-		System.out.println(cidsjson);
-		
-		Type type = new TypeToken<String[]>(){}.getType();
-		
-		String[] cids = (String[])JSONUtil.fromJson(cidsjson, type);
-		System.out.println(cids);
+		System.out.println(JSONUtil.toJson(m));
 	}
 }

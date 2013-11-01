@@ -7,7 +7,8 @@ import java.util.Map;
 
 import org.junit.Test;
 
-import com.yyu.fwk.performance.Performance.Action;
+import com.yyu.fwk.common.DurationExecuter;
+import com.yyu.fwk.common.Executer;
 
 
 public class PerformanceTest {
@@ -15,14 +16,14 @@ public class PerformanceTest {
 	@Test
 	public void run() throws Exception{
 		final ServiceMethod sm = new ServiceMethod();
-		List<Map<String, String>> r;
 		
-		Performance p = Performance.getInstance(PerformanceTest.class);
-		r = p.execute("running a test with 10 seconds", new Action<List<Map<String, String>>>(){public List<Map<String, String>> action() throws Exception {
-			return sm.doService();
-		}});
-		
-		System.out.println(r);
+		Executer d = new DurationExecuter<String>("service"){
+			@Override
+			public void action() throws Exception {
+				System.out.println(sm.doService());
+			}
+		};
+		d.execute();
 	}
 }
 
