@@ -1,5 +1,6 @@
 package com.yyu.temp;
 
+import java.io.File;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -14,9 +15,13 @@ public class TextExtractor {
         filter.addSkipLine("定制电子书--您只需要告诉我们书名 ");
         filter.addSkipLine("最低价格  最优服务   ");
         
-        String pdfPath = "/Users/yangyu/Downloads/Battle Hymn of The Tiger Mother.pdf";
-        String txtPath = "/Users/yangyu/Downloads/Battle Hymn of The Tiger Mother.txt";
-        TikaUtil.extractTextFromPDF(pdfPath, txtPath, filter);
+//        String pdfPath = "/Users/yangyu/Downloads/Battle Hymn of The Tiger Mother.pdf";
+//        String txtPath = "/Users/yangyu/Downloads/Battle Hymn of The Tiger Mother.txt";
+//        TikaUtil.extractTextFromFile(new File(pdfPath), new File(txtPath), filter);
+        
+        String pdfPath = "/Users/yangyu/Downloads/The Art of Deception.pdf";
+        String txtPath = "/Users/yangyu/Downloads/The Art of Deception.txt";
+        TikaUtil.extractTextFromFile(new File(pdfPath), new File(txtPath), filter);
         System.out.println("done");
     }
 }
