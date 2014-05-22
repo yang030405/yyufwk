@@ -135,14 +135,6 @@
 		</dependency>
 		<!-- libs for reading csv. -->
 		
-		<!-- Cubead's framework 
-		<dependency>
-			<groupId>com.cubead</groupId>
-			<artifactId>cajf-common-utils</artifactId>
-			<version>1.0.4</version>
-		</dependency>
-		-->
-		
 		<!-- libs for selenium2 test: -->
 		<dependency> 
 		    <groupId>org.seleniumhq.selenium</groupId> 
@@ -186,5 +178,11 @@
 			<version>5.1.18</version>
 		</dependency>
 		<!-- libs for mysql connector. -->
+
+		<dependency>
+			<groupId>org.apache.tika</groupId>
+			<artifactId>tika-parsers</artifactId>
+			<version>1.5</version>
+		</dependency>
 	</dependencies>
 </project>
