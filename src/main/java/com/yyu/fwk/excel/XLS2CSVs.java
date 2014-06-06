@@ -18,7 +18,7 @@ import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.poifs.filesystem.POIFSFileSystem;
 
 import com.yyu.fwk.util.BeanUtil;
-import com.yyu.fwk.util.FileUtil;
+import com.yyu.fwk.util.CSVUtil;
 
 public class XLS2CSVs {
 
@@ -36,7 +36,7 @@ public class XLS2CSVs {
 			String filename = processCSVFilePath(excelFilePath, sheetName);
 			List<String> titles = getSheetTitles(sheet);
 			List<String[]> values = getSheetValues(sheet);
-			FileUtil.writeToCSV(filename, titles, values);
+			CSVUtil.writeToCSV(filename, titles, values);
 			csvPathes.add(filename);
 		}
 		in.close();

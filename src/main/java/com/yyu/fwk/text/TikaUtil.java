@@ -10,7 +10,6 @@ import java.io.Writer;
 
 import org.apache.tika.Tika;
 import org.apache.tika.exception.TikaException;
-import org.apache.tika.language.LanguageIdentifier;
 
 import com.yyu.fwk.common.Filter;
 

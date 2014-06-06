@@ -20,6 +20,7 @@ import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
 import com.yyu.fwk.excel.exception.UnsupportExcelVersionException;
 import com.yyu.fwk.util.BeanUtil;
+import com.yyu.fwk.util.CSVUtil;
 import com.yyu.fwk.util.FileUtil;
 
 public class Excel2CSVExtractor {
@@ -61,7 +62,7 @@ public class Excel2CSVExtractor {
 			String filename = processCSVFilePath(excelFilePath, sheetName);
 			List<String> titles = getSheetTitles(sheet);
 			List<String[]> values = getSheetValues(sheet);
-			FileUtil.writeToCSV(filename, titles, values);
+			CSVUtil.writeToCSV(filename, titles, values);
 			csvPathes.add(filename);
 		}
 		in.close();
