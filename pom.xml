@@ -184,5 +184,13 @@
 			<artifactId>tika-parsers</artifactId>
 			<version>1.5</version>
 		</dependency>
+		
+		<dependency>
+			<groupId>org.jid3lib</groupId>
+			<artifactId>jid3lib</artifactId>
+			<version>0.5.4</version>
+			<scope>system</scope>
+			<systemPath>${project.basedir}/lib/jid3lib.jar</systemPath>
+		</dependency>
 	</dependencies>
 </project>
