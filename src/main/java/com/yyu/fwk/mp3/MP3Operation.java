@@ -11,9 +11,10 @@ import org.farng.mp3.id3.ID3v1;
 
 public class MP3Operation {
     public static void main(String[] args) throws Exception {
-        String filePath = "/Users/yangyu/Music/田连元 - 刘秀传 -  第01回.mp3";
+        String filePath = "/Users/yangyu/Movies/百度云同步盘/Yang's/download/鬼吹灯1精绝古城/JingJueGuCheng001.mp3";
         
-        readTag(filePath);
+//        readTag(filePath);
+        readAsID3V1();
         
 //        MP3File mp3 = new MP3File(filePath);
 //        AbstractID3v2 tag = mp3.getID3v2Tag();
@@ -39,7 +40,7 @@ public class MP3Operation {
     }
     
     private static void readAsID3V1() throws Exception {
-        String filePath = "/Users/yangyu/Movies/百度云同步盘/Yang's/musics/田连元/刘秀传/田连元 - 刘秀传 -  第01回.mp3";
+        String filePath = "/Users/yangyu/Movies/百度云同步盘/Yang's/download/鬼吹灯1精绝古城/JingJueGuCheng001.mp3";
         MP3File mp3 = new MP3File(filePath);
         ID3v1 tag = mp3.getID3v1Tag();
         System.out.println("album                 = " + new String(tag.getAlbum().getBytes("ISO-8859-1"), "GB2312"));
@@ -53,9 +54,14 @@ public class MP3Operation {
         System.out.println("song comment          = " + new String(tag.getSongComment().getBytes("ISO-8859-1"), "GB2312"));
         System.out.println("song title            = " + new String(tag.getSongTitle().getBytes("ISO-8859-1"), "GB2312"));
         System.out.println("title                 = " + new String(tag.getTitle().getBytes("ISO-8859-1"), "GB2312"));
-        System.out.println("track number on album = " + new String(tag.getTrackNumberOnAlbum().getBytes("ISO-8859-1"), "GB2312"));
+//        System.out.println("track number on album = " + new String(tag.getTrackNumberOnAlbum().getBytes("ISO-8859-1"), "GB2312"));
         System.out.println("year                  = " + new String(tag.getYear().getBytes("ISO-8859-1"), "GB2312"));
         System.out.println("year released         = " + new String(tag.getYearReleased().getBytes("ISO-8859-1"), "GB2312"));
+        
+        tag.setTitle("JingJueGuCheng001");
+        
+        mp3.setID3v1Tag(tag);
+        mp3.save(filePath);
     }
     
     
