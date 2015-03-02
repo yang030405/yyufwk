@@ -1,4 +1,4 @@
-package com.yyu.xmlparser.hbm;
+package com.yyu.xmlparser.hbm.attributeparser;
 
 import java.util.Collection;
 import java.util.HashMap;
@@ -11,16 +11,17 @@ import javax.xml.stream.XMLStreamReader;
 
 import com.yyu.xmlparser.Parser;
 
-public class ColumnParser implements Parser {
+public class PropertyParser implements Parser {
+
     private XMLStreamReader reader;
     
-    public ColumnParser(XMLStreamReader reader) {
+    public PropertyParser(XMLStreamReader reader) {
         this.reader = reader;
     }
     
     @Override
     public boolean hasNext() {
-        return "column".equalsIgnoreCase(reader.getLocalName()) && reader.isStartElement();
+        return "property".equalsIgnoreCase(reader.getLocalName()) && reader.isStartElement();
     }
 
     @Override
@@ -30,22 +31,22 @@ public class ColumnParser implements Parser {
         for (int i = 0;i < attributeCount; i++) {
             QName attributeName = reader.getAttributeName(i);
             if ("name".equals(attributeName.getLocalPart())) {
-                String columnName = reader.getAttributeValue(i);
-                fieldInfo.put("columnName", columnName);
+                String javaName = reader.getAttributeValue(i);
+                fieldInfo.put("javaName", javaName);
             }
-            if ("length".equals(attributeName.getLocalPart())) {
-                String columnLength = reader.getAttributeValue(i);
-                fieldInfo.put("columnLength", columnLength);
+            if ("type".equals(attributeName.getLocalPart())) {
+                String type = reader.getAttributeValue(i);
+                fieldInfo.put("javaType", type);
             }
         }
         return fieldInfo;
     }
-    
+
     @Override
     public Collection<String> getKeys() {
         Set<String> keys = new HashSet<String>();
-        keys.add("columnName");
-        keys.add("columnLength");
+        keys.add("javaName");
+        keys.add("javaType");
         return keys;
     }
 }

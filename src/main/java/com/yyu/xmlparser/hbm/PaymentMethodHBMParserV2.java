@@ -11,6 +11,10 @@ import java.util.Set;
 
 import com.yyu.fwk.util.MapFileUtil;
 import com.yyu.xmlparser.Parser;
+import com.yyu.xmlparser.hbm.attributeparser.ColumnParser;
+import com.yyu.xmlparser.hbm.attributeparser.ManyToOneParser;
+import com.yyu.xmlparser.hbm.attributeparser.MetaParser;
+import com.yyu.xmlparser.hbm.attributeparser.PropertyParser;
 
 public class PaymentMethodHBMParserV2 extends HBMParserBase {
 

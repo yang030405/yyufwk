@@ -1,4 +1,4 @@
-package com.yyu.xmlparser.hbm;
+package com.yyu.xmlparser.hbm.attributeparser;
 
 import java.util.Collection;
 import java.util.HashMap;

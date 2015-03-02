@@ -1,4 +1,4 @@
-package com.yyu.xmlparser.hbm;
+package com.yyu.xmlparser.hbm.attributeparser;
 
 import java.util.Collection;
 import java.util.HashMap;
@@ -11,17 +11,17 @@ import javax.xml.stream.XMLStreamReader;
 
 import com.yyu.xmlparser.Parser;
 
-public class PropertyParser implements Parser {
+public class ManyToOneParser implements Parser {
 
     private XMLStreamReader reader;
     
-    public PropertyParser(XMLStreamReader reader) {
+    public ManyToOneParser(XMLStreamReader reader) {
         this.reader = reader;
     }
     
     @Override
     public boolean hasNext() {
-        return "property".equalsIgnoreCase(reader.getLocalName()) && reader.isStartElement();
+        return "many-to-one".equalsIgnoreCase(reader.getLocalName()) && reader.isStartElement();
     }
 
     @Override
@@ -34,10 +34,6 @@ public class PropertyParser implements Parser {
                 String javaName = reader.getAttributeValue(i);
                 fieldInfo.put("javaName", javaName);
             }
-            if ("type".equals(attributeName.getLocalPart())) {
-                String type = reader.getAttributeValue(i);
-                fieldInfo.put("javaType", type);
-            }
         }
         return fieldInfo;
     }
@@ -46,7 +42,6 @@ public class PropertyParser implements Parser {
     public Collection<String> getKeys() {
         Set<String> keys = new HashSet<String>();
         keys.add("javaName");
-        keys.add("javaType");
         return keys;
     }
 }
