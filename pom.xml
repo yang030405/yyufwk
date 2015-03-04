@@ -192,5 +192,20 @@
 			<scope>system</scope>
 			<systemPath>${project.basedir}/lib/jid3lib.jar</systemPath>
 		</dependency>
+		
+		<dependency>
+			<groupId>com.typesafe.akka</groupId>
+			<artifactId>akka-actor</artifactId>
+			<version>2.0.3</version>
+		</dependency>
+		
 	</dependencies>
+	
+	<repositories>
+		<repository>
+			<id>typesafe</id>
+			<name>Typesafe Repository</name>
+			<url>http://repo.typesafe.com/typesafe/releases/</url>
+		</repository>
+	</repositories>
 </project>

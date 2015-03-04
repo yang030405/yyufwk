@@ -1,4 +1,4 @@
-package com.yyu.xmlparser.hbm;
+package com.yyu.akka.study.xmlparser.action;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -9,15 +9,12 @@ import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Set;
 
+import com.yyu.akka.study.xmlparser.HBMParserBase;
+import com.yyu.akka.study.xmlparser.attributeparser.ColumnParser;
 import com.yyu.fwk.util.MapFileUtil;
 import com.yyu.xmlparser.Parser;
-import com.yyu.xmlparser.hbm.attributeparser.ColumnParser;
-import com.yyu.xmlparser.hbm.attributeparser.ManyToOneParser;
-import com.yyu.xmlparser.hbm.attributeparser.MetaParser;
-import com.yyu.xmlparser.hbm.attributeparser.PropertyParser;
 
-public class PaymentMethodHBMParserV2 extends HBMParserBase {
-
+public class ColumnParseAction extends HBMParserBase {
     public final static Map<String,String> methodTypeFields = new HashMap<String,String>();
     public final static Map<String, Set<String>> fieldMapMethodType = new HashMap<String, Set<String>>();
     static{
@@ -48,21 +45,21 @@ public class PaymentMethodHBMParserV2 extends HBMParserBase {
         }
     }
     
-    public PaymentMethodHBMParserV2(String hbmFilePath) {
+    public ColumnParseAction(String hbmFilePath) {
         super(hbmFilePath);
     }
     
     @Override
     public List<Parser> getParsers() {
         List<Parser> parsers = new ArrayList<Parser>();
-        parsers.add(new PropertyParser(getReader()));
-        parsers.add(new ManyToOneParser(getReader()));
+//        parsers.add(new PropertyParser(getReader()));
+//        parsers.add(new ManyToOneParser(getReader()));
         parsers.add(new ColumnParser(getReader()));
-        parsers.add(new MetaParser(getReader(), MetaParser.API_FIELD_NAME));
-        parsers.add(new MetaParser(getReader(), MetaParser.API_ACCESS));
-        parsers.add(new MetaParser(getReader(), MetaParser.API_FIELD_MAX_VERSION));
-        parsers.add(new MetaParser(getReader(), MetaParser.API_FIELD_MIN_VERSION));
-        parsers.add(new MetaParser(getReader(), MetaParser.API_PERMISSION));
+//        parsers.add(new MetaParser(getReader(), MetaParser.API_FIELD_NAME));
+//        parsers.add(new MetaParser(getReader(), MetaParser.API_ACCESS));
+//        parsers.add(new MetaParser(getReader(), MetaParser.API_FIELD_MAX_VERSION));
+//        parsers.add(new MetaParser(getReader(), MetaParser.API_FIELD_MIN_VERSION));
+//        parsers.add(new MetaParser(getReader(), MetaParser.API_PERMISSION));
         return parsers;
     }
     
@@ -78,7 +75,7 @@ public class PaymentMethodHBMParserV2 extends HBMParserBase {
         
         String xmlFilePath = "/Users/yangyu/Documents/zuora/main_workspace/main_webapp/src/com/zuora/zbilling/paymentmethod/model/PaymentMethod.hbm.xml";
 //        String xmlFilePath = "/Users/yangyu/Desktop/test.xml";
-        PaymentMethodHBMParserV2 parser = new PaymentMethodHBMParserV2(xmlFilePath);
+        ColumnParseAction parser = new ColumnParseAction(xmlFilePath);
         
         List<Map<String, String>> fieldsInfo = parser.getFiledsInfo();
         for (Map<String, String> field : fieldsInfo) {
