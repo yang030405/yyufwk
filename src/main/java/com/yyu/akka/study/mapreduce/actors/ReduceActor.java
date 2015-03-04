@@ -12,9 +12,9 @@ import com.yyu.akka.study.mapreduce.messages.WordCount;
 public class ReduceActor extends UntypedActor {
     @Override
     public void onReceive(Object message) throws Exception {
-        ActorHelper.sleep1Second();
+//        ActorHelper.sleep1Second();
         if (message instanceof MapData) {
-            ActorHelper.printInfo(ReduceActor.class);
+//            ActorHelper.printInfo(ReduceActor.class);
             MapData mapData = (MapData) message;
             // reduce the incoming data and forward the result to Master actor
             getSender().tell(reduce(mapData.getDataList()));

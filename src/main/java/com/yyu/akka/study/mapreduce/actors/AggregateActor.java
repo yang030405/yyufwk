@@ -13,9 +13,9 @@ public class AggregateActor extends UntypedActor {
 
     @Override
     public void onReceive(Object message) throws Exception {
-        ActorHelper.sleep1Second();
+//        ActorHelper.sleep1Second();
         if (message instanceof ReduceData) {
-            ActorHelper.printInfo(AggregateActor.class);
+//            ActorHelper.printInfo(AggregateActor.class);
             ReduceData reduceData = (ReduceData) message;
             aggregateInMemoryReduce(reduceData.getReduceDataList());
         } else if (message instanceof Result) {

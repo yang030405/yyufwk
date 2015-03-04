@@ -16,8 +16,8 @@ public class MasterActor extends UntypedActor {
 
     @Override
     public void onReceive(Object message) throws Exception {
-        ActorHelper.sleep1Second();
-        ActorHelper.printInfo(MasterActor.class);
+//        ActorHelper.sleep1Second();
+//        ActorHelper.printInfo(MasterActor.class);
         if (message instanceof String) {
             mapActor.tell(message, getSelf());
         } else if (message instanceof MapData) {

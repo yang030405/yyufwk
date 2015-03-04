@@ -17,9 +17,9 @@ public class MapActor extends UntypedActor {
 
     @Override
     public void onReceive(Object message) throws Exception {
-        ActorHelper.sleep1Second();
+//        ActorHelper.sleep1Second();
         if (message instanceof String) {
-            ActorHelper.printInfo(MapActor.class);
+//            ActorHelper.printInfo(MapActor.class);
             String work = (String) message;
             // map the words in the sentence and send the result to MasterActor
             getSender().tell(evaluateExpression(work));
