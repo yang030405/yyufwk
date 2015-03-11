@@ -9,7 +9,7 @@ public class Excel2CSVTest {
 	@Test
 	public void testExtractExcel() throws Exception {
 //		String excelFilePath = "/Users/apple/Downloads/beforechange.xls";
-		String excelFilePath = "/Users/apple/Downloads/beforechange_2.xls";
+		String excelFilePath = "/Users/yangyu/Desktop/temp/invoice_data.xlsx";
 		Excel2CSVExtractor excel2CSV = new Excel2CSVExtractor(excelFilePath);
 		System.out.println(excel2CSV.extract());
 		System.out.println("done");

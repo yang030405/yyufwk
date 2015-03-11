@@ -21,6 +21,10 @@ public class CsvFileParser implements Iterator<Map<String, String>> {
 	
 	public static final String EMPTY_TAG = "-";
 	
+	public static final char DEFAULT_SEPEATOR = ',';
+	
+	private String emptyTag = EMPTY_TAG;
+	
 	private String[] header;
 	
 	private CsvReader csvReader;
@@ -33,16 +37,22 @@ public class CsvFileParser implements Iterator<Map<String, String>> {
 	
 	private Map<String, String> currentValue;
 	
+	private boolean isEnableLog = false;
+	
 	public String[] getHeader() {
 		return header;
 	}
 
-	public CsvFileParser(String fileName) {		
+	public CsvFileParser(String fileName) {
+	    this(fileName, DEFAULT_SEPEATOR);
+	}
+
+	public CsvFileParser(String fileName, char sepeator) {		
 		File file = new File(fileName);
 		this.tempFileName = fileName;
 		try {
 			//File file=new File(fileName);
-			csvReader = new CsvReader(new FileInputStream(file), ',', Charset.forName("utf-8"));
+			csvReader = new CsvReader(new FileInputStream(file), sepeator, Charset.forName("utf-8"));
 			
 			//初始化头
 			csvReader.readHeaders();
@@ -66,11 +76,11 @@ public class CsvFileParser implements Iterator<Map<String, String>> {
 		try{
 			long tempLineLength = 0;
 			String[] dataArray = csvReader.getValues();
-			if(dataArray.length != header.length){
+			if(isEnableLog && (dataArray.length != header.length)){
 				log.warn("lineNum[" + lineNum + "] >> dataArray.length = [" + dataArray.length + "] and header.length = [" + header.length + "] of file[" + this.tempFileName + "]");
 			}
 			for (int i = 0; i < header.length; i++) {
-				if("-".equals(dataArray[i]))
+				if(emptyTag.equals(dataArray[i]))
 					result.put(header[i], null);
 				else{
 					result.put(header[i], dataArray[i]);
@@ -103,5 +113,12 @@ public class CsvFileParser implements Iterator<Map<String, String>> {
 	public void close(){
 		csvReader.close();
 	}
-
+	
+	public void setEmptyTag(String emptyTag) {
+	    this.emptyTag = emptyTag;
+	}
+	
+	public void setIsEnableLog(boolean enable) {
+	    this.isEnableLog = enable;
+	}
 }
