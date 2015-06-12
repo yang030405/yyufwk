@@ -73,7 +73,7 @@ public class ColumnParseAction extends HBMParserBase {
     public static void main(String[] args) throws Exception {
         long start = System.currentTimeMillis();
         
-        String xmlFilePath = "/Users/yangyu/Documents/zuora/main_workspace/main_webapp/src/com/zuora/zbilling/paymentmethod/model/PaymentMethod.hbm.xml";
+        String xmlFilePath = "";
 //        String xmlFilePath = "/Users/yangyu/Desktop/test.xml";
         ColumnParseAction parser = new ColumnParseAction(xmlFilePath);
         

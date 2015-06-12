@@ -76,7 +76,7 @@ public class PaymentMethodHBMParserV2 extends HBMParserBase {
     public static void main(String[] args) throws Exception {
         long start = System.currentTimeMillis();
         
-        String xmlFilePath = "/Users/yangyu/Documents/zuora/main_workspace/main_webapp/src/com/zuora/zbilling/paymentmethod/model/PaymentMethod.hbm.xml";
+        String xmlFilePath = "";
 //        String xmlFilePath = "/Users/yangyu/Desktop/test.xml";
         PaymentMethodHBMParserV2 parser = new PaymentMethodHBMParserV2(xmlFilePath);
         

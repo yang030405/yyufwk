@@ -25,7 +25,6 @@ public class PaymentMethodHBMParseApplication {
             Timeout timeout = new Timeout(Duration.parse("5 seconds"));
             ActorRef aggregateActor = _system.actorOf(new Props(AggregateActor.class), "AggregateActor");
 
-            // String xmlFilePath = "/Users/yangyu/Documents/zuora/main_workspace/main_webapp/src/com/zuora/zbilling/paymentmethod/model/PaymentMethod.hbm.xml";
             String xmlFilePath = "/Users/yangyu/Desktop/test.xml";
             aggregateActor.tell(xmlFilePath);
 

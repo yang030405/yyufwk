@@ -2,10 +2,13 @@ package com.yyu.fwk.util;
 
 import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;
+import java.io.BufferedWriter;
 import java.io.File;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.io.OutputStreamWriter;
 import java.io.RandomAccessFile;
 
 import org.apache.commons.io.FileUtils;
@@ -149,5 +152,12 @@ public class FileUtil {
 				bos.close();
 			}
 		}
+	}
+	
+	public static void writeStringToFile(String s, File file) throws Exception {
+	    BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(file, true)));
+	    bw.write(s + "\n");
+	    bw.flush();
+	    bw.close();
 	}
 }
